@@ -1,3 +1,4 @@
+
 Geçen yaptığın 2 reducer ve redux dönüşüm projeleri beğenildi. Bu yüzden sana bir proje daha verdiler.
 Yeni projen, data.js dosyasında yer alan filmleri sırayla görüntüleyen ve istendiğinde görüntülenen filmi izleme listesine ekleyebilen, ekleneni çıkarabilen bir film uygulaması.
 
@@ -27,4 +28,5 @@ Bu isterleri gerçekleştirmek için aşağıdaki adımları planladın.
 [ ] Filmler arasında gezinmeyi kolaylaştırmak için bir "Önceki" butonu ekleyin.
 [ ] Bir film favorilere eklendiğinde Filmler listesinden çıksın, favorilerden çıkarıldığında tekrar eklensin.
 [ ] Tüm filmler favorilere eklenince -gösterilecek film kalmadığında- App.jsx aşağıdaki element'i render etsin.
+
 <div className="text-center"> Eklenecek yeni film bulunamadı... </div> - [ ] Film listesi 20 adet film içeriyor. Filmler arasında gezinirken son filme geldiğinizde "Sıradaki" butonunun, ilk filme geldiğinizde "Önceki" butonunun görüntülenmemesini sağla.
