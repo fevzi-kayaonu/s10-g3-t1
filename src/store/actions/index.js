@@ -11,10 +11,10 @@ export const öncekiFilm = () => {
   return { type: ÖNCEKİ_FİLM };
 };
 
-export const addFavorite = (movie) => {
-  return { type: ADD_FAVORİTE, payload: movie };
+export const addFavorite = () => {
+  return { type: ADD_FAVORİTE };
 };
 
-export const removeFavorite = (movie) => {
-  return { type: REMOVE_FAVORİTE, payload: movie };
+export const removeFavorite = (id) => {
+  return { type: REMOVE_FAVORİTE, payload: id };
 };

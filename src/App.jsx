@@ -2,20 +2,30 @@ import { Switch, Route, NavLink } from "react-router-dom";
 import Movie from "./components/Movie.jsx";
 import FavMovie from "./components/FavMovie.jsx";
 import { useDispatch, useSelector } from "react-redux";
-import { sonrakiFilm, öncekiFilm } from "./store/actions/index.js";
+import { addFavorite, sonrakiFilm, öncekiFilm } from "./store/actions/index.js";
 
 function App() {
-  const { sira, favMovies } = useSelector((store) => store);
-
-  //console.log(favMovies);
+  const sira = useSelector((store) => store.sira);
+  const favMovies = useSelector((store) => store.favMovies);
+  const movies = useSelector((store) => store.movies);
+  console.log(sira);
+  console.log(favMovies);
   const dispatch = useDispatch();
 
-  function handleFilm(type) {
-    if (type == "sonraki") {
-      dispatch(sonrakiFilm());
-    } else if (type == "önceki") {
-      dispatch(öncekiFilm());
-    }
+  function handleSonrakiFilm() {
+    //console.log("girdim handlesonrakifilm");
+    dispatch(sonrakiFilm());
+  }
+  function handleOncekiFilm() {
+    //e.preventDefault();
+    // console.log("girdim handleöncekifilm");
+    dispatch(öncekiFilm());
+  }
+
+  function handleAddFavorite() {
+    //e.preventDefault();
+    //console.log("girdim handleöncekifilm");
+    dispatch(addFavorite());
   }
 
   return (
@@ -39,33 +49,45 @@ function App() {
       </nav>
       <Switch>
         <Route exact path="/">
-          <Movie sira={sira} />
+          {movies.length === 0 ? (
+            <div className="text-center">
+              {" "}
+              Eklenecek yeni film bulunamadı...{" "}
+            </div>
+          ) : (
+            <>
+              <Movie />
+              <div className="flex gap-3 justify-end py-3">
+                {sira > 0 && (
+                  <button
+                    onClick={handleOncekiFilm}
+                    className="select-none px-4 py-2 border border-blue-700 text-blue-700 hover:border-blue-500 hover:text-blue-500"
+                  >
+                    Önceki
+                  </button>
+                )}
+                {sira < movies.length - 1 && (
+                  <button
+                    onClick={handleSonrakiFilm}
+                    className="select-none px-4 py-2 border border-blue-700 text-blue-700 hover:border-blue-500 hover:text-blue-500"
+                  >
+                    Sıradaki
+                  </button>
+                )}
 
-          <div className="flex gap-3 justify-end py-3">
-            {sira > 0 && (
-              <button
-                onClick={handleFilm("önceki")}
-                className="select-none px-4 py-2 border border-blue-700 text-blue-700 hover:border-blue-500 hover:text-blue-500"
-              >
-                Önceki
-              </button>
-            )}
-            <button
-              onClick={handleFilm("sonraki")}
-              className="select-none px-4 py-2 border border-blue-700 text-blue-700 hover:border-blue-500 hover:text-blue-500"
-            >
-              Sıradaki
-            </button>
-
-            <button className="select-none px-4 py-2 bg-blue-700 hover:bg-blue-600 text-white">
-              Listeme ekle
-            </button>
-          </div>
+                <button
+                  className="select-none px-4 py-2 bg-blue-700 hover:bg-blue-600 text-white"
+                  onClick={handleAddFavorite}
+                >
+                  Listeme ekle
+                </button>
+              </div>
+            </>
+          )}
         </Route>
-
         <Route path="/listem">
           <div>
-            {favMovies?.map((movie) => (
+            {favMovies.map((movie) => (
               <FavMovie key={movie.id} title={movie.title} id={movie.id} />
             ))}
           </div>
